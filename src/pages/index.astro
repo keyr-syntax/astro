@@ -1,8 +1,14 @@
 ---
+import Blog from "../components/Blog.astro";
 import Footer from "../components/Footer.astro";
-import Navigation from "../components/Navigation.astro"; "../components/Navigation.astro"
+import Navigation from "../components/Navigation.astro";
 import "./styles/global.css"
 const pageTitle = "Tikur Azmud";
+const BACKEND_API = "https://test-subdomain.keyrunasir.com";
+const data = await fetch(`${BACKEND_API}/api/blog/fetchallblogs`);
+const response = await data.json();
+// This will only show in the server console
+console.log("Response from backend:", response);
 
 ---
 
@@ -16,8 +22,26 @@ const pageTitle = "Tikur Azmud";
 	</head>
 	<body>
 		<Navigation />
-		
 		<h1>{pageTitle}</h1>
+		<button id="fetchButton">
+			Fetch blogs
+		</button>
+		<Blog message={response.message}, blogs={
+			response.post
+		} />
 		<Footer />
+
+		<script>
+			// Client-side JavaScript
+			document.getElementById('fetchButton').addEventListener('click', async () => {
+				try {
+					const data = await fetch('https://test-subdomain.keyrunasir.com/api/blog/fetchallblogs');
+					const response = await data.json();
+					console.log('API Response:', response);
+				} catch (error) {
+					console.error('Error fetching data:', error);
+				}
+			});
+		</script>
 	</body>
 </html>

@@ -1,0 +1,29 @@
+---
+const { message, blogs } = Astro.props;
+---
+<style>
+    div {
+        color: white;
+    }
+</style>
+
+
+<div>
+    <p>Message from API Response:{message}</p>
+    {
+        blogs && blogs.length > 0 ? blogs.map((blog)=>
+        <div>
+            Name: <span>
+                {blog.author}
+            </span>
+            Title: <span>
+                {
+                    blog.title
+                }
+            </span>
+        </div> 
+    
+    ) : <div>No Blogs</div>
+    }
+
+</div>
