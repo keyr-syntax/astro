@@ -3,16 +3,8 @@ import BlogByID from "../../components/BlogByID.astro";
 import Navigation from "../../components/Navigation.astro";
 import Footer from "../../components/Footer.astro";
 
-const BACKEND_API = "https://test-subdomain.keyrunasir.com";
+// const BACKEND_API = "https://test-subdomain.keyrunasir.com";
 
-
-// export async function getStaticPaths() {
-//   const res = await fetch(`https://test-subdomain.keyrunasir.com/api/blog/fetchallblogs`);
-//   const json = await res.json();
-//   return json.post.map((post: { id: { toString: () => any; }; }) => ({
-//     params: { id: post.id.toString() },
-//   }));
-// }
 export const ssr = true;
 
 const { id } = Astro.params;
