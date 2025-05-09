@@ -33,7 +33,7 @@ console.log("Response from backend:", response);
 			// Client-side JavaScript
 			document.getElementById('fetchButton').addEventListener('click', async () => {
 				try {
-					const data = await fetch('https://test-subdomain.keyrunasir.com/api/blog/fetchoneblog/17');
+					const data = await fetch('https://test-subdomain.keyrunasir.com/api/blog/fetchallblogs');
 					const response = await data.json();
 					console.log('API Response:', response);
 				} catch (error) {
