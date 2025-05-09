@@ -1,0 +1,26 @@
+---
+import Hamburger from "./Hamburger.astro";
+
+
+---
+<style>
+    a {
+        display: block;
+        color: white;
+        text-decoration: none;
+    }
+    div {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 8rem;
+    }
+</style>
+
+<div>
+    <Hamburger />
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/blog">Blog</a>
+</div>

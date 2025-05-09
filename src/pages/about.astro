@@ -1,4 +1,26 @@
 ---
+// frontmatter or Astro script or inside code fence
+import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
+import "./styles/global.css"
+
+
+
+const pageTitle = "About Tikur Azmud";
+const identity = {
+name:"Keyr",
+country:"Ethiopia",
+occupation:"Developer",
+hobbies:["HTML", "Tailwind CSS", "Typescript"]
+};
+
+const skills = ["HTML", "Tailwind CSS", "Typescript","Javascript", "React"]
+const happy = true;
+const done = true;
+const target = 3;
+const skillsColor = "red";
+const fontWeight = "bold";
+const textCase = "uppercase";
 
 ---
 
@@ -8,13 +30,58 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Tikur Azmud</title>
+		<title>{pageTitle}</title>
+
+		<style define:vars={{skillsColor, fontWeight, textCase }}>
+			a {
+				color:blue;
+			}
+			h1 {
+				color: green;
+			}
+			.skills-li {
+				color: var(--skillsColor);
+				font-weight: var(--fontWeight);
+				text-transform: var(--textCase);
+			}
+		</style>
 	</head>
 	<body>
-        <a href="/">Home</a>
-		<a href="/about">About</a>
-        <a href="/blog">Blog</a>
-		<h1>About</h1>
-        <p>This is Astro frontend framework tutorial</p>
+       <Navigation />
+		<h1>{pageTitle}</h1>
+        <ul>
+			<li>Here are few facts about me</li>
+			<li>
+			Name: {identity.name}
+			</li>
+			<li>
+				Country: {identity.country}
+			</li>
+			{
+				identity.hobbies.length >= 2 && 
+				<li>
+				Two of my hobbies are: {
+					identity.hobbies[1]
+				} and {
+					identity.hobbies[2]
+				}
+				</li>
+			}
+			<ul>
+				Skills:{skills && skills.length > 0 && skills.map((skill) =>(<li class="skills-li" >{skill}</li>))}
+			</ul>
+
+		</ul>
+		{
+			happy && <p>
+				I am happy to be treated on Tikur Azmud App!
+			</p>
+		}
+		{
+			done && <p>
+				I have paid for my service on Tikur Azmud!
+			</p>
+		}
+		<Footer />
 	</body>
 </html>
