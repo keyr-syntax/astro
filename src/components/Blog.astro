@@ -5,25 +5,39 @@ const { message, blogs } = Astro.props;
     div {
         color: white;
     }
+    .blog-item {
+        cursor: pointer;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+    }
+    .blog-item:hover {
+        background-color: #333;
+    }
 </style>
-
 
 <div>
     <p>Message from API Response:{message}</p>
     {
-        blogs && blogs.length > 0 ? blogs.map((blog)=>
-        <div>
+        blogs && blogs.length > 0 ? blogs.map((blog) =>
+        <div class="blog-item" data-blog-id={blog.id}>
+            <p>Blog ID: {blog.id}</p>
             Name: <span>
                 {blog.author}
             </span>
             Title: <span>
-                {
-                    blog.title
-                }
+                {blog.title}
             </span>
         </div> 
-    
-    ) : <div>No Blogs</div>
+        ) : <div>No Blogs</div>
     }
-
 </div>
+
+<script>
+    document.querySelectorAll('.blog-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const blogId = item.getAttribute('data-blog-id');
+            window.location.href = `/blog/${blogId}`;
+        });
+    });
+</script>

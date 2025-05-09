@@ -1,0 +1,48 @@
+---
+import BlogByID from "../../components/BlogByID.astro";
+import Navigation from "../../components/Navigation.astro";
+import Footer from "../../components/Footer.astro";
+
+const BACKEND_API = "https://test-subdomain.keyrunasir.com";
+
+
+export async function getStaticPaths() {
+  const res = await fetch(`https://test-subdomain.keyrunasir.com/api/blog/fetchallblogs`);
+  const json = await res.json();
+  return json.post.map((post: { id: { toString: () => any; }; }) => ({
+    params: { id: post.id.toString() },
+  }));
+}
+
+const { id } = Astro.params;
+
+let blog = null;
+try {
+  const response = await fetch(`https://test-subdomain.keyrunasir.com/api/blog/fetchoneblog/${id}`);
+  if (!response.ok) throw new Error("Fetch failed");
+  const data = await response.json();
+  blog = data.post;
+} catch {
+  blog = null;
+}
+---
+<html lang="en">
+  <head>…
+    <meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+    <style>
+      h1 {
+        color: #333;
+        font-size: 2rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <Navigation />
+    {blog ? <BlogByID blog={blog} /> : <h1>Blog not found</h1>}
+    <Footer />
+  </body>
+</html>

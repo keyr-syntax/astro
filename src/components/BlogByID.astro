@@ -1,0 +1,27 @@
+---
+const {blog} = Astro.props;
+---
+<div>
+    <p>Blog fetched by ID</p>
+    {
+        blog  ? 
+        <div>
+            <p>Blog ID: {blog.id}</p>
+            Name: <span>
+                {blog.author}
+            </span>
+            Title: <span>
+                {
+                    blog.title
+                }
+            </span>
+        </div>  : <div>No Blog found</div>
+    }
+
+</div>
+<style>
+    div {
+        color: black;
+        font-size: 1.2rem;
+    }
+</style>
